@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI赋能医生 · 培训课程体系</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500&family=DM+Sans:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #F5F0E8;
+    --bg-warm:   #EDE6D8;
+    --bg-card:   #FDFAF5;
+    --ink:       #2C2416;
+    --ink-mid:   #6B5F4E;
+    --ink-light: #A8997F;
+    --rule:      #DDD5C3;
+
+    --clay:      #C4976A;
+    --clay-bg:   #F7F0E7;
+    --sage:      #7A9E87;
+    --sage-bg:   #EEF4F0;
+    --dust:      #B07A6E;
+    --dust-bg:   #F6EDEB;
+    --sky:       #6A8FAD;
+    --sky-bg:    #EBF1F6;
+    --moss:      #8A9E6A;
+    --moss-bg:   #F0F4EB;
+    --lavender:  #9585B0;
+    --lavender-bg:#F0EDF6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--bg-warm);
+    border-bottom: 1px solid var(--rule);
+    position: sticky; top: 0; z-index: 50;
+  }
+  .header-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .servier-pill {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--sage);
+    border: 1px solid var(--sage); border-radius: 99px;
+    padding: 3px 12px;
+  }
+  .header-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px; font-weight: 400; color: var(--ink);
+  }
+  .header-right { font-size: 12px; color: var(--ink-light); }
+
+  /* HERO */
+  .hero {
+    max-width: 1100px; margin: 0 auto;
+    padding: 5rem 2rem 3.5rem;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 2rem; align-items: end;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 10px;
+    opacity: 0; animation: fadeUp 0.6s ease forwards;
+  }
+  .hero-eyebrow::before { content:''; width:24px; height:1px; background:var(--rule); }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+    font-weight: 400; line-height: 1.18;
+    color: var(--ink); margin-bottom: 1.25rem;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.1s;
+  }
+  .hero h1 em { font-style: italic; color: var(--sage); }
+  .hero-desc {
+    font-size: 14px; color: var(--ink-mid); max-width: 480px;
+    line-height: 1.85; font-weight: 300;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.2s;
+  }
+  .hero-stats {
+    display: flex; flex-direction: column; gap: 1.5rem; text-align: right;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.25s;
+  }
+  .stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem; font-weight: 400; line-height: 1; color: var(--ink);
+  }
+  .stat-l {
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-light); margin-top: 2px;
+  }
+
+  /* FILTERS */
+  .filters-wrap {
+    max-width: 1100px; margin: 0 auto;
+    padding: 1.4rem 2rem;
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    border-bottom: 1px solid var(--rule);
+  }
+  .filters-label {
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-light); white-space: nowrap;
+  }
+  .filter-group { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filter-btn {
+    padding: 5px 16px; border-radius: 99px;
+    border: 1px solid var(--rule);
+    background: transparent; color: var(--ink-mid);
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 400;
+    cursor: pointer; transition: all 0.18s ease; white-space: nowrap;
+  }
+  .filter-btn:hover { border-color: var(--ink-light); color: var(--ink); }
+  .filter-btn.active                       { background:var(--ink);       border-color:var(--ink);       color:#F5F0E8; }
+  .filter-btn[data-mod="write"].active     { background:var(--clay);      border-color:var(--clay);      color:#fff; }
+  .filter-btn[data-mod="read"].active      { background:var(--sage);      border-color:var(--sage);      color:#fff; }
+  .filter-btn[data-mod="patient"].active   { background:var(--dust);      border-color:var(--dust);      color:#fff; }
+  .filter-btn[data-mod="research"].active  { background:var(--sky);       border-color:var(--sky);       color:#fff; }
+  .filter-btn[data-mod="admin"].active     { background:var(--moss);      border-color:var(--moss);      color:#fff; }
+  .filter-btn[data-mod="ppt"].active       { background:var(--lavender);  border-color:var(--lavender);  color:#fff; }
+
+  /* MAIN */
+  .main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+
+  /* MODULE */
+  .module-block {
+    margin-bottom: 3.5rem;
+    opacity: 0; transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .module-block.visible { opacity: 1; transform: translateY(0); }
+
+  .module-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 1rem; padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .mod-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+  .dot-write     { background: var(--clay); }
+  .dot-read      { background: var(--sage); }
+  .dot-patient   { background: var(--dust); }
+  .dot-research  { background: var(--sky); }
+  .dot-admin     { background: var(--moss); }
+  .dot-ppt       { background: var(--lavender); }
+
+  .mod-name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px; font-weight: 400; color: var(--ink);
+  }
+  .mod-cnt { font-size: 11px; color: var(--ink-light); margin-left: auto; }
+
+  /* GRID */
+  .course-grid {
+    display: grid; grid-template-columns: repeat(2,1fr);
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: 10px; overflow: hidden;
+  }
+  .course-card {
+    background: var(--bg-card); padding: 1.4rem 1.6rem;
+    transition: background 0.18s; position: relative; overflow: hidden;
+  }
+  .course-card.span2 { grid-column: 1 / -1; }
+  .course-card:hover { background: var(--bg); }
+  .course-card::after {
+    content:''; position:absolute; top:0; left:0; right:0;
+    height:2px; opacity:0; transition:opacity 0.18s;
+  }
+  .course-card:hover::after { opacity:1; }
+  .card-write::after    { background: var(--clay); }
+  .card-read::after     { background: var(--sage); }
+  .card-patient::after  { background: var(--dust); }
+  .card-research::after { background: var(--sky); }
+  .card-admin::after    { background: var(--moss); }
+  .card-ppt::after      { background: var(--lavender); }
+
+  .card-no {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 11px; color: var(--ink-light); margin-bottom: 5px;
+  }
+  .card-title {
+    font-size: 14px; font-weight: 500; color: var(--ink);
+    line-height: 1.4; margin-bottom: 1rem;
+  }
+  .info-label {
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 500; display: block; margin-bottom: 3px;
+  }
+  .label-write    { color: var(--clay); }
+  .label-read     { color: var(--sage); }
+  .label-patient  { color: var(--dust); }
+  .label-research { color: var(--sky); }
+  .label-admin    { color: var(--moss); }
+  .label-ppt      { color: var(--lavender); }
+
+  .info-need { font-size: 13px; color: var(--ink-mid); line-height: 1.7; font-weight: 300; margin-bottom: 0.85rem; }
+  .card-rule { height: 1px; background: var(--rule); margin-bottom: 0.85rem; }
+  .info-goal { font-size: 13px; color: var(--ink); line-height: 1.7; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--rule);
+    max-width: 1100px; margin: 0 auto; padding: 2rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .foot-l { font-size: 12px; color: var(--ink-light); line-height: 1.8; }
+  .foot-r { font-size: 12px; color: var(--ink-light); text-align: right; line-height: 1.8; }
+  .foot-accent { color: var(--ink-mid); font-weight: 500; }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(14px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  @media(max-width:700px){
+    .course-grid { grid-template-columns: 1fr; }
+    .course-card.span2 { grid-column: 1; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-stats { flex-direction: row; gap: 2rem; text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-left">
+      <span class="servier-pill">Servier</span>
+      <span class="header-title">AI赋能医生培训体系</span>
+    </div>
+    <div class="header-right">6大模块 · 20节课程</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">AI Training Curriculum for Physicians</div>
+    <h1>让每一位医生<br>都能<em>驾驭</em> AI</h1>
+    <p class="hero-desc">针对中国临床医生真实工作流程设计，从科普写作到基金申请，从病历提速到课件制作，覆盖医生职业成长全场景。</p>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-n">6</div><div class="stat-l">核心模块</div></div>
+    <div><div class="stat-n">20</div><div class="stat-l">实操课程</div></div>
+    <div><div class="stat-n">3</div><div class="stat-l">难度梯队</div></div>
+  </div>
+</div>
+
+<div class="filters-wrap">
+  <span class="filters-label">筛选模块</span>
+  <div class="filter-group">
+    <button class="filter-btn active" data-mod="all"      onclick="doFilter('all',this)">全部课程</button>
+    <button class="filter-btn"        data-mod="write"    onclick="doFilter('write',this)">医学写作</button>
+    <button class="filter-btn"        data-mod="read"     onclick="doFilter('read',this)">文献阅读</button>
+    <button class="filter-btn"        data-mod="patient"  onclick="doFilter('patient',this)">患者教育</button>
+    <button class="filter-btn"        data-mod="research" onclick="doFilter('research',this)">科研辅助</button>
+    <button class="filter-btn"        data-mod="admin"    onclick="doFilter('admin',this)">行政文书</button>
+    <button class="filter-btn"        data-mod="ppt"      onclick="doFilter('ppt',this)">课件制作</button>
+  </div>
+</div>
+
+<div class="main" id="main"></div>
+
+<footer>
+  <div class="foot-l">
+    <div class="foot-accent">AI赋能医生 · 培训课程体系</div>
+    <div>为施维雅医学团队定制设计</div>
+  </div>
+  <div class="foot-r">
+    <div>覆盖临床 · 科研 · 行政三大场景</div>
+    <div>入门 · 进阶 · 高阶全梯队</div>
+  </div>
+</footer>
+
+<script>
+const DATA = [
+  { id:'write', name:'医学写作提效', dot:'dot-write', lc:'label-write', cc:'card-write', courses:[
+    {no:1,  name:'用AI写科普文章',           need:'每月需完成公众号/健康宣教内容，无从下笔、耗时长',     goal:'10分钟内完成一篇800字科室科普推文，并能自由调整风格'},
+    {no:2,  name:'AI辅助撰写综述与文献回顾', need:'晋升需要，想写综述但梳理文献耗时数周',               goal:'结合文献速生成综述框架与摘要段落，缩短撰写周期'},
+    {no:3,  name:'SCI投稿润色与摘要优化',    need:'英文写作能力受限，投稿被拒或审稿人意见多',           goal:'用AI完成英文摘要润色、讨论段落优化，达到投稿标准'},
+    {no:4,  name:'病例报告快速成文',          need:'典型病例想记录投稿，格式繁琐、缺乏时间',             goal:'按CARE规范用AI生成结构化病例报告初稿'},
+  ]},
+  { id:'read', name:'文献精读与信息提取', dot:'dot-read', lc:'label-read', cc:'card-read', courses:[
+    {no:5,  name:'AI快速解读英文文献',        need:'大量英文文献堆积，读不完也看不懂统计方法',           goal:'用AI 5分钟内提取一篇RCT文章的核心结论、P值与局限性'},
+    {no:6,  name:'批量文献筛选与摘要汇总',    need:'开题/申报基金前需大量查阅文献，效率极低',             goal:'用AI工具对20篇文献批量生成结构化摘要表格'},
+    {no:7,  name:'指南解读与临床决策辅助',    need:'新指南发布频繁，难以快速掌握核心变化',               goal:'让AI提炼最新指南关键推荐条目，与旧版对比差异'},
+  ]},
+  { id:'patient', name:'患者教育与沟通', dot:'dot-patient', lc:'label-patient', cc:'card-patient', courses:[
+    {no:8,  name:'生成个性化患者教育材料',    need:'向患者解释复杂诊断和用药方案耗时，效果差',           goal:'用AI生成通俗版出院须知、用药指导单，适配不同文化程度'},
+    {no:9,  name:'门诊问诊效率提升',          need:'门诊量大，同类问题反复解释、记录耗时',               goal:'用AI生成常见问诊QA模板，辅助快速回复患者问题'},
+    {no:10, name:'多语言患者沟通辅助',        need:'外籍或少数民族患者沟通存在语言障碍',                 goal:'用AI实时翻译患者病情说明，支持多语种准确传达医嘱'},
+  ]},
+  { id:'research', name:'科研设计与数据分析辅助', dot:'dot-research', lc:'label-research', cc:'card-research', courses:[
+    {no:11, name:'研究选题与假设生成',         need:'想做课题但不知如何凝练研究问题',                   goal:'与AI对话完成PICO框架搭建，产出3个可行研究假设'},
+    {no:12, name:'基金申请书AI辅助撰写',       need:'国自然/省自然申请书撰写压力大、逻辑薄弱',           goal:'用AI优化立项依据、研究方案段落，提升逻辑连贯性'},
+    {no:13, name:'统计图表解读与结果呈现',     need:'看不懂合作者统计图，投稿时结果描述不准确',           goal:'让AI解读Forest Plot / K-M曲线，生成规范结果描述文本'},
+    {no:14, name:'AI辅助数据清洗与分析思路',   need:'有SPSS数据但不知如何分析，找统计老师成本高',         goal:'用AI设计统计分析方案，辅助生成Python/R代码分析思路'},
+  ]},
+  { id:'admin', name:'行政文书与日常效率', dot:'dot-admin', lc:'label-admin', cc:'card-admin', courses:[
+    {no:15, name:'病历书写提速与规范化',       need:'大量重复性病历书写占用大量时间',                   goal:'用AI模板快速生成入院记录、首次病程记录框架，减少50%书写时间'},
+    {no:16, name:'学术会议/科室汇报摘要生成',  need:'开会汇报需快速整理材料，准备时间不足',               goal:'输入要点，AI生成结构化会议摘要或科室工作总结'},
+    {no:17, name:'职称晋升材料AI优化',         need:'个人总结、业绩陈述逻辑散乱、写作能力不足',           goal:'用AI优化晋升材料表达，突出核心成果，提升可读性'},
+  ]},
+  { id:'ppt', name:'课件制作与学术演讲', dot:'dot-ppt', lc:'label-ppt', cc:'card-ppt', courses:[
+    {no:18, name:'学术PPT一键生成',            need:'科室讲课、学术会议发言，制作PPT耗时耗力',           goal:'用AI工具15分钟内生成含结构、逻辑的学术演讲PPT初稿'},
+    {no:19, name:'演讲稿与口播脚本生成',       need:'不擅长表达，讲课思路混乱，准备时间长',               goal:'基于PPT内容生成逐页演讲稿，练习有效表达'},
+    {no:20, name:'医学图表与示意图AI生成',     need:'需要展示解剖图、数据图，但不会设计工具',             goal:'用AI生成可用于幻灯的简洁数据可视化图表与示意'},
+  ]},
+];
+
+function buildCard(c, m, span2) {
+  return `<div class="course-card ${m.cc}${span2?' span2':''}">
+    <div class="card-no">No.${String(c.no).padStart(2,'0')}</div>
+    <div class="card-title">${c.name}</div>
+    <span class="info-label ${m.lc}">医生痛点</span>
+    <p class="info-need">${c.need}</p>
+    <div class="card-rule"></div>
+    <span class="info-label ${m.lc}">学完能做到</span>
+    <p class="info-goal">${c.goal}</p>
+  </div>`;
+}
+
+function buildBlock(m) {
+  const cards = m.courses.map((c,i)=>{
+    const span2 = m.courses.length%2!==0 && i===m.courses.length-1;
+    return buildCard(c,m,span2);
+  }).join('');
+  return `<div class="module-block" data-id="${m.id}">
+    <div class="module-header">
+      <span class="mod-dot ${m.dot}"></span>
+      <span class="mod-name">${m.name}</span>
+      <span class="mod-cnt">${m.courses.length} 节课</span>
+    </div>
+    <div class="course-grid">${cards}</div>
+  </div>`;
+}
+
+function render(f) {
+  const list = f==='all' ? DATA : DATA.filter(m=>m.id===f);
+  document.getElementById('main').innerHTML = list.map(buildBlock).join('');
+  const obs = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  },{threshold:0.06});
+  document.querySelectorAll('.module-block').forEach((el,i)=>{
+    if(i<2) el.classList.add('visible'); else obs.observe(el);
+  });
+}
+
+function doFilter(f, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  render(f);
+}
+
+render('all');
+</script>
+</body>
+</html>
