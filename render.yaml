@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: servier-ai-training
+    runtime: static
+    plan: free
+    buildCommand: mkdir -p public && cp index.html public/index.html
+    staticPublishPath: ./public

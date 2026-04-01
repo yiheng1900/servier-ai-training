@@ -14,4 +14,11 @@ Then open `http://127.0.0.1:8000`.
 
 ## Deployment
 
-This repository is intended to be deployed with GitHub Pages from the `main` branch root.
+This repository can be deployed in two ways:
+
+- GitHub Pages from the `main` branch root
+- Render via the included `render.yaml`
+
+## Deploy to Render
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/yiheng1900/servier-ai-training)
